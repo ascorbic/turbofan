@@ -10,6 +10,8 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
+    "@netlify/edge-functions": "^2.2.0",
+    "@netlify/functions": "^2.2.1",
     "ui": "workspace:*"
   },
   "devDependencies": {
