@@ -2,7 +2,7 @@ import type { Context as BlobContext } from "https://deploy-preview-243--edge.ne
 import type { Config, Context } from "https://edge.netlify.com/v1/index.ts";
 
 export const config: Config = {
-  method: ["GET", "PUT", "HEAD"],
+  method: ["GET", "PUT"],
   path: "/v8/artifacts/:hash",
 };
 
