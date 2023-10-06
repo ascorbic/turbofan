@@ -1,5 +1,5 @@
 import type { Context as BlobContext } from "https://deploy-preview-243--edge.netlify.app";
-import type { Config, Context } from "https://edge.netlify.com/v1/index.ts";
+import type { Context } from "@netlify/edge-functions";
 
 export default async (request: Request, context: BlobContext & Context) => {
   console.log(request.url);
@@ -27,7 +27,7 @@ export default async (request: Request, context: BlobContext & Context) => {
     }
     const headers = new Headers();
     headers.set("Content-Type", "application/octet-stream");
-    headers.set("Content-Length", blob.length.toString());
+    headers.set("Content-Length", blob.byteLength.toString());
     return new Response(blob, { headers });
   } catch (e) {
     console.log(e);
@@ -35,7 +35,7 @@ export default async (request: Request, context: BlobContext & Context) => {
   }
 };
 
-export const config: Config = {
+export const config = {
   method: ["GET", "PUT"],
   path: "/v8/artifacts/:hash",
 };
