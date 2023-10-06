@@ -2,8 +2,7 @@ import type { Context as BlobContext } from "https://deploy-preview-243--edge.ne
 import type { Context } from "@netlify/edge-functions";
 
 export default async (request: Request, context: BlobContext & Context) => {
-  console.log(request.url);
-  console.log(request.headers, request.method);
+  console.log(request.method, request.url);
 
   const bearerHeader = request.headers.get("authorization");
   const token = bearerHeader?.replace("Bearer ", "");
@@ -12,6 +11,10 @@ export default async (request: Request, context: BlobContext & Context) => {
     return new Response("Unauthorized", { status: 401 });
   }
   const { hash } = context.params;
+
+  if(!hash) {
+    return new Response("Not found", { status: 404 });
+  }
 
   if (request.method === "PUT") {
     const blob = await request.arrayBuffer();
