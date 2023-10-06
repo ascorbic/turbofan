@@ -1,11 +1,6 @@
 import type { Context as BlobContext } from "https://deploy-preview-243--edge.netlify.app";
 import type { Config, Context } from "https://edge.netlify.com/v1/index.ts";
 
-export const config: Config = {
-  method: ["GET", "PUT"],
-  path: "/v8/artifacts/:hash",
-};
-
 export default async (request: Request, context: BlobContext & Context) => {
   console.log(request.url);
   console.log(request.headers, request.method);
@@ -20,7 +15,7 @@ export default async (request: Request, context: BlobContext & Context) => {
 
   if (request.method === "PUT") {
     const blob = await request.arrayBuffer();
-    await context.blobs.put(hash, blob);
+    await context.blobs.set(hash, blob);
     return new Response("OK");
   }
   try {
@@ -38,4 +33,9 @@ export default async (request: Request, context: BlobContext & Context) => {
     console.log(e);
     return new Response(e.message, { status: 500 });
   }
+};
+
+export const config: Config = {
+  method: ["GET", "PUT"],
+  path: "/v8/artifacts/:hash",
 };
