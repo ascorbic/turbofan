@@ -7,5 +7,6 @@ export default async (request: Request, context: Context) => {
 };
 
 export const config: Config = {
-  path: ["/artifact/:id", "/test"],
+  method: ["GET", "PUT"],
+  path: "/artifact/:id",
 };
