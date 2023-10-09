@@ -12,8 +12,7 @@
   },
   "dependencies": {
     "@netlify/edge-functions": "^2.2.0",
-    "@netlify/functions": "^2.2.1",
-    "ui": "workspace:*"
+    "@netlify/functions": "^2.2.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

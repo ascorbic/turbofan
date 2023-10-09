@@ -21,28 +21,6 @@ importers:
         specifier: latest
         version: 1.6.3
 
-  apps/docs:
-    dependencies:
-      ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
-    devDependencies:
-      eslint:
-        specifier: ^7.32.0
-        version: 7.32.0
-      eslint-config-custom:
-        specifier: workspace:*
-        version: link:../../packages/eslint-config-custom
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../packages/tsconfig
-      typescript:
-        specifier: ^4.9.4
-        version: 4.9.4
-      vite:
-        specifier: ^4.0.3
-        version: 4.0.3
-
   apps/web:
     dependencies:
       '@netlify/edge-functions':
@@ -51,9 +29,6 @@ importers:
       '@netlify/functions':
         specifier: ^2.2.1
         version: 2.2.1
-      ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
     devDependencies:
       eslint:
         specifier: ^7.32.0
@@ -84,21 +59,6 @@ importers:
         version: 8.5.0(eslint@7.32.0)
 
   packages/tsconfig: {}
-
-  packages/ui:
-    devDependencies:
-      eslint:
-        specifier: ^7.32.0
-        version: 7.32.0
-      eslint-config-custom:
-        specifier: workspace:*
-        version: link:../eslint-config-custom
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
-      typescript:
-        specifier: ^4.9.4
-        version: 4.9.4
 
 packages:
 
