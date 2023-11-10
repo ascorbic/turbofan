@@ -15,6 +15,7 @@ export default async (request: Request, context:  Context) => {
   const team_id = url.searchParams.get('team_id');
 
   if(!context.params.hash || !team_id) {
+    console.log("Missing params");
     return new Response("Not found", { status: 404 });
   }
 
@@ -25,6 +26,7 @@ export default async (request: Request, context:  Context) => {
   if (request.method === "PUT") {
     const blob = await request.arrayBuffer();
     if(!blob) {
+      console.log("No content");
       return new Response("No content", { status: 400 });
     }
     await store.set(hash, blob);
@@ -35,11 +37,13 @@ export default async (request: Request, context:  Context) => {
       type: "arrayBuffer",
     });
     if (!blob) {
+      console.log("Artifact not found");
       return new Response(`Artifact ${hash} not found`, { status: 404 });
     }
     const headers = new Headers();
     headers.set("Content-Type", "application/octet-stream");
     headers.set("Content-Length", blob.byteLength.toString());
+    console.log("Returning artifact", blob.byteLength.toString())
     return new Response(blob, { headers });
   } catch (e) {
     console.log(e);
