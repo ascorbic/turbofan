@@ -14,14 +14,20 @@ export default async (request: Request, context: Context) => {
 
   const teamId = url.searchParams.get('teamId');
 
-  if(!context.params.hash || !teamId) {
+  let hash: string | undefined  = context.params?.hash;
+
+  if(!hash) {
+    hash = url.pathname.split('/').pop();
+  }
+
+  if(!hash || !teamId) {
     console.log("Missing params", {hash: context.params, teamId});
     return new Response("Not found", { status: 404 });
   }
 
   const store = getStore(`artifacts-${encodeURIComponent(teamId)}`);
 
-  const hash = encodeURIComponent(context.params.hash);
+  const key = encodeURIComponent(context.params.hash);
 
   if (request.method === "PUT") {
     const blob = await request.arrayBuffer();
@@ -29,11 +35,11 @@ export default async (request: Request, context: Context) => {
       console.log("No content");
       return new Response("No content", { status: 400 });
     }
-    await store.set(hash, blob);
+    await store.set(key, blob);
     return new Response("OK");
   }
   try {
-    const blob = await store.get(hash, {
+    const blob = await store.get(key, {
       type: "arrayBuffer",
     });
     if (!blob) {
@@ -43,6 +49,7 @@ export default async (request: Request, context: Context) => {
     const headers = new Headers();
     headers.set("Content-Type", "application/octet-stream");
     headers.set("Content-Length", blob.byteLength.toString());
+    headers.set("Cache-Control", "public, s-maxage=31536000, immutable");
     console.log("Returning artifact", blob.byteLength.toString())
     return new Response(blob, { headers });
   } catch (e) {
@@ -54,4 +61,5 @@ export default async (request: Request, context: Context) => {
 export const config = {
   method: ["GET", "PUT"],
   path: "/v8/artifacts/:hash",
+  cache: "manual"
 };
