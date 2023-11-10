@@ -32,6 +32,9 @@ importers:
       '@netlify/functions':
         specifier: ^2.2.1
         version: 2.2.1
+      turbofan:
+        specifier: workspace:^
+        version: link:../../packages/turbofan
     devDependencies:
       eslint:
         specifier: ^7.32.0
@@ -62,6 +65,8 @@ importers:
         version: 8.5.0(eslint@7.32.0)
 
   packages/tsconfig: {}
+
+  packages/turbofan: {}
 
 packages:
 
