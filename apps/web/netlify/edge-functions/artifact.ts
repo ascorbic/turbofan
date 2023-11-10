@@ -12,14 +12,14 @@ export default async (request: Request, context:  Context) => {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  const team_id = url.searchParams.get('team_id');
+  const teamId = url.searchParams.get('teamId');
 
-  if(!context.params.hash || !team_id) {
-    console.log("Missing params");
+  if(!context.params.hash || !teamId) {
+    console.log("Missing params", {hash: context.params.hash, teamId});
     return new Response("Not found", { status: 404 });
   }
 
-  const store = getStore(`artifacts-${encodeURIComponent(team_id)}`);
+  const store = getStore(`artifacts-${encodeURIComponent(teamId)}`);
 
   const hash = encodeURIComponent(context.params.hash);
 
