@@ -1,9 +1,9 @@
-import { getStore } from "@netlify/blobs"
+import { getStore } from "https://esm.sh/@netlify/blobs";
 import type { Context } from "@netlify/edge-functions";
 
 export default async (request: Request, context:  Context) => {
+  const url = new URL(request.url);
   console.log(request.method, request.url);
-  const store = getStore('artifacts');
 
   const bearerHeader = request.headers.get("authorization");
   const token = bearerHeader?.replace("Bearer ", "");
@@ -11,14 +11,22 @@ export default async (request: Request, context:  Context) => {
     console.log("Unauthorized");
     return new Response("Unauthorized", { status: 401 });
   }
-  const { hash } = context.params;
 
-  if(!hash) {
+  const team_id = url.searchParams.get('team_id');
+
+  if(!context.params.hash || !team_id) {
     return new Response("Not found", { status: 404 });
   }
 
+  const store = getStore(`artifacts-${encodeURIComponent(team_id)}`);
+
+  const hash = encodeURIComponent(context.params.hash);
+
   if (request.method === "PUT") {
     const blob = await request.arrayBuffer();
+    if(!blob) {
+      return new Response("No content", { status: 400 });
+    }
     await store.set(hash, blob);
     return new Response("OK");
   }
