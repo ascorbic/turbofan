@@ -1,8 +1,9 @@
-import type { Context as BlobContext } from "https://deploy-preview-243--edge.netlify.app";
+import { getStore } from "@netlify/blobs"
 import type { Context } from "@netlify/edge-functions";
 
-export default async (request: Request, context: BlobContext & Context) => {
+export default async (request: Request, context:  Context) => {
   console.log(request.method, request.url);
+  const store = getStore('artifacts');
 
   const bearerHeader = request.headers.get("authorization");
   const token = bearerHeader?.replace("Bearer ", "");
@@ -18,11 +19,11 @@ export default async (request: Request, context: BlobContext & Context) => {
 
   if (request.method === "PUT") {
     const blob = await request.arrayBuffer();
-    await context.blobs.set(hash, blob);
+    await store.set(hash, blob);
     return new Response("OK");
   }
   try {
-    const blob = await context.blobs.get(hash, {
+    const blob = await store.get(hash, {
       type: "arrayBuffer",
     });
     if (!blob) {
