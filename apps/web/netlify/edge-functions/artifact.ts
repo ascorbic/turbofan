@@ -1,7 +1,7 @@
 import { getStore } from "https://esm.sh/@netlify/blobs";
 import type { Context } from "@netlify/edge-functions";
 
-export default async (request: Request, context:  Context) => {
+export default async (request: Request, context: Context) => {
   const url = new URL(request.url);
   console.log(request.method, request.url);
 
@@ -15,7 +15,7 @@ export default async (request: Request, context:  Context) => {
   const teamId = url.searchParams.get('teamId');
 
   if(!context.params.hash || !teamId) {
-    console.log("Missing params", {hash: context.params.hash, teamId});
+    console.log("Missing params", {hash: context.params, teamId});
     return new Response("Not found", { status: 404 });
   }
 
