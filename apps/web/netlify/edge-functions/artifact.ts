@@ -49,7 +49,8 @@ export default async (request: Request, context: Context) => {
     const headers = new Headers();
     headers.set("Content-Type", "application/octet-stream");
     headers.set("Content-Length", blob.byteLength.toString());
-    headers.set("Cache-Control", "public, s-maxage=31536000, immutable");
+    headers.set("Netlify-CDN-Cache-Control", "public, s-maxage=31536000, immutable");
+    headers.set("Netlify-Vary", "header=Authorization,query=teamId");
     console.log("Returning artifact", blob.byteLength.toString())
     return new Response(blob, { headers });
   } catch (e) {
