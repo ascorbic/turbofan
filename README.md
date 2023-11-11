@@ -14,7 +14,7 @@ Deploy a standalone instance of Turbofan that can be used by multiple Turborepo 
 
 Click the button below to deploy Turbofan to Netlify:
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ascorbic/turbofan)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ascorbic/turbofan&base=apps/standalone)
 
 Enter a shared secret that will be used to authenticate with Turbofan. You will need to provide this secret to your Turborepo projects.
 
