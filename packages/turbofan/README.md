@@ -1,10 +1,8 @@
 <div align="center">
 
-# Turbofan
+![Turbofan](https://github.com/ascorbic/turbofan/assets/213306/eae9ae24-27da-4812-b348-2dbec42c0f9e)
 
 ## Self-hosted remote cache for Turborepo
-
-![turbofan-logo](https://github.com/ascorbic/turbofan/assets/213306/eae9ae24-27da-4812-b348-2dbec42c0f9e)
 
 </div>
 
@@ -29,15 +27,15 @@ You'll need to enter a shared secret that will be used to authenticate with Turb
 You can add a Turbofan instance to your Turborepo project by adding a Netlify Edge Function to your project. There is no need to install anything as it can be imported directly from deno.land.
 
 ```typescript
-// .netlify/edge-functions/turbofan.ts
+// netlify/edge-functions/turbofan.ts
 
 export { handleRequest as default } from "https://deno.land/x/turbofan/mod.ts";
 
-export const config {
-    path: "/api/turbofan",
-    cache: "manual",
-}
-
+export const config = {
+  method: ["GET", "PUT"],
+  path: "/v8/artifacts/:hash",
+  cache: "manual",
+};
 ```
 
 ## Setting up your Turborepo project
