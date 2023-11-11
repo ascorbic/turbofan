@@ -1,0 +1,4 @@
+# These are only used to set up the template, and are not used in the build
+# If you want to update the real values, change them in the site UI or CLI
+[template.environment]
+TURBO_TOKEN = "Choose a random value, and provide the same env var to your sites"
