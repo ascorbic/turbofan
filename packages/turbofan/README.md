@@ -1,8 +1,14 @@
+<div align="center">
+
 # Turbofan
 
 ## Self-hosted remote cache for Turborepo
 
-Speed up your build by deploying your own remote cache for [Turborepo](https://turbo.build).
+![turbofan-logo](https://github.com/ascorbic/turbofan/assets/213306/eae9ae24-27da-4812-b348-2dbec42c0f9e)
+
+</div>
+
+We're all fans of [Turborepo](https://turbo.build), but for the speediest Full Turbo builds you need a remote cache. Turbofan lets you deploy your own, self-hosted remote cache in just a few clicks.
 
 ## Usage
 
@@ -14,9 +20,9 @@ Deploy a standalone instance of Turbofan that can be used by multiple Turborepo 
 
 Click the button below to deploy Turbofan to Netlify:
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ascorbic/turbofan)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ascorbic/turbofan-server)
 
-Enter a shared secret that will be used to authenticate with Turbofan. You will need to provide this secret to your Turborepo projects.
+You'll need to enter a shared secret that will be used to authenticate with Turbofan and then provide this secret to all of your Turborepo projects. A quick way to generate a token on Mac OS or Linux is to run `uuidgen` in your terminal.
 
 ### Per-project instance
 
@@ -51,11 +57,13 @@ The teamid can be anything you want, as long as it starts with `team_`. This wil
 
 The API url should be the URL of your Turbofan instance. This will either be the URL of the standalone cache, or the URL of your Netlify site if you are using a per-project instance.
 
-You then need to provide the shared secret as en env var to the builds:
+You then need to provide the shared secret as an env var to the builds:
 
 ```env
 TURBO_TOKEN=your-secret-here
 ```
+
+You can set this in the Netlify UI, or in the CLI by running `netlify env:set`.
 
 ## Troublehooting
 
