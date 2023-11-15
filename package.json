@@ -3,14 +3,9 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "tokengen": "echo \"TURBO_TOKEN=$(uuidgen)\" > .env"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-custom": "workspace:*",
-    "prettier": "^2.5.1",
     "turbo": "^1.6.3"
   },
   "packageManager": "pnpm@8.8.0"

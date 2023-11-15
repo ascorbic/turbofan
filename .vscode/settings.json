@@ -5,9 +5,9 @@
     }
   ],
   "deno.enablePaths": [
-    "./apps/web/netlify/edge-functions",
+    "./apps/standalone/netlify/edge-functions",
     "./packages/turbofan"
 
   ],
-  "deno.importMap": "./apps/web/.netlify/edge-functions-import-map.json"
+  "deno.importMap": "./apps/standalone/.netlify/edge-functions-import-map.json"
 }

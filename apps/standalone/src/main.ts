@@ -1,10 +1,7 @@
 import "./style.css";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-  </div>
-`;
+<h1>This is a <a href="https://github.com/ascorbic/turbofan">Turbofan</a> server</h1>
+<img alt="Turbofan" width="300" height="300" src="./turbofan-logo.png" />
 
+`;
